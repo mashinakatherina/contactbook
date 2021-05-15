@@ -25,7 +25,7 @@ public class ContactTool {
 
     public Contact removeContact(String contactBookId, final String contactId) {
         if (!contactBook.containsKey(contactBookId)) {
-            throw new ValidationException("AddressBook with the given Id does not exist");
+            throw new ValidationException("Contact does not exist");
         }
         Optional<Contact> contactToBeRemoved = contactBook.get(contactBookId).stream()
                 .filter(contact -> contact.getId().equals(contactId)).findFirst();
@@ -34,14 +34,14 @@ public class ContactTool {
             contactBook.get(contactBookId).remove(contactToBeRemoved.get());
             return contactToBeRemoved.get();
         } else {
-            throw new ValidationException("The given contact does not exist!");
+            throw new ValidationException("Contact does not exist");
         }
     }
 
     public List<Contact> findContacts(String contactBookId) {
 
         if (!contactBook.containsKey(contactBookId)) {
-            throw new ValidationException("AddressBook with the given Id does not exist");
+            throw new ValidationException("Contact book with the given Id does not exist");
         }
 
         return contactBook.get(contactBookId);
