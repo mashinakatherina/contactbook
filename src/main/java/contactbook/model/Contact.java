@@ -21,6 +21,7 @@ public class Contact {
 
     @NotNull(message = "Phone number can not be null")
     @NotEmpty(message = "Phone number can not be empty")
+    @Pattern(regexp = "//(\\+)?(\\(\\d{2,3}\\) ?\\d|\\d)(([ \\-]?\\d)|( ?\\(\\d{2,3}\\) ?)){5,12}\\d/", message = "Wrong format of phone number")
     List<String> numbers;
 
     public Contact(String name, String surname, List<String> numbers) {

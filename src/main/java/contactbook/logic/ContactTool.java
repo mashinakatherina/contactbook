@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 @Service
 public class ContactTool {
 
+    private static final String FIRST_CONTACT_BOOK = "first-contact-book";
+    private static final String SECOND_CONTACT_BOOK = "second-contact-book";
     private final Map<String, List<Contact>> contactBook = new HashMap<>();
 
     public Contact addContact(String contactBookId, Contact contact) {
@@ -52,6 +54,17 @@ public class ContactTool {
             return contacts.stream().distinct().collect(Collectors.toList());
         }
         return contacts;
+    }
+
+    public ContactTool() {
+        contactBook.put(FIRST_CONTACT_BOOK, new ArrayList<>());
+        contactBook.put(SECOND_CONTACT_BOOK, new ArrayList<>());
+
+        this.addContact(FIRST_CONTACT_BOOK, new Contact("Ekaterina", "Mashina", Collections.singletonList("1234567890")));
+        this.addContact(FIRST_CONTACT_BOOK, new Contact("Maria", "Ekaterinina", Collections.singletonList("0987654321")));
+
+        this.addContact(SECOND_CONTACT_BOOK, new Contact("Ekaterina", "Mashina", Collections.singletonList("1234567890")));
+        this.addContact(SECOND_CONTACT_BOOK, new Contact("Maria", "Ekaterinina", Collections.singletonList("0987654321")));
     }
 
 }
