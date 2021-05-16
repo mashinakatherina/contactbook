@@ -64,7 +64,7 @@ public class ContactToolTest {
             Assert.assertEquals("Contact book with the given Id does not exist", e.getMessage());
         }
     }
-    
+
     @Test
     public void getAllContacts() {
 
@@ -83,6 +83,27 @@ public class ContactToolTest {
 
         Assert.assertEquals(4, retrievedContactsAfterAddingDuplicates.size() - retrievedContactsBeforeAddingDuplicates.size());
     }
+
+    @Test
+    public void findAllUniqueContacts() {
+
+        List<Contact> retrievedContactsBeforeAddingDuplicates = contactService.findAllUniqueContacts(true);
+
+        contactService.addContact(TEST_CONTACT_BOOK_1, testContact());
+        contactService.addContact(TEST_CONTACT_BOOK_1, testContact());
+
+        Contact contact2 = testContact();
+        contact2.setName("Kate");
+
+        contactService.addContact(TEST_CONTACT_BOOK_2, contact2);
+        contactService.addContact(TEST_CONTACT_BOOK_2, testContact());
+
+        List<Contact> retrievedContactsAfterAddingDuplicates = contactService.findAllUniqueContacts(true);
+
+        Assert.assertEquals(2, retrievedContactsAfterAddingDuplicates.size()
+                - retrievedContactsBeforeAddingDuplicates.size());
+    }
+
 
     private Contact testContact() {
         return new Contact("Test", "TTest", Arrays.asList("1000000000", "9999999999"));
